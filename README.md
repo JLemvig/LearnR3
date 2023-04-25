@@ -1,7 +1,7 @@
 Jonas
 Islet Epigenetics sd
 
-TODO: Add more to the title of your project here
+TODO: Add more to the title of your project here a
 
 # LearnR3:
 
@@ -22,7 +22,7 @@ The following folders contain:
 # Installing project R package dependencies
 
 If dependencies have been managed by using `usethis::use_package("packagename")`
-through the `DESCRIPTION` file, installing dependencies is as easy as opening the
+through the `DESCRIPTION` file, installing dependencies is as easy as opening thea
 `LearnR3.Rproj` file and running this command in the console:
 
     # install.packages("remotes")
@@ -33,5 +33,5 @@ You'll need to have remotes installed for this to work.
 # Resource
 
 For more information on this folder and file workflow and setup, check
-out the [prodigenr](https://rostools.github.io/prodigenr) online
+out the [prodigenr](https://rostools.github.io/prodigenr) onlinea
 documentation.
