@@ -15,7 +15,7 @@ TODO: As project evolves, add brief description of what is inside the data, doc 
 
 The following folders contain:
 
-- `data/`:
+- `data/`: test tes
 - `doc/`:
 - `R/`:
 
