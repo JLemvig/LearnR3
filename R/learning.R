@@ -49,3 +49,32 @@ nhanes_small %>%
   select(starts_with("bp_")) %>%
   rename(bp_systolic = bp_sys_ave)
 
+# Filtering
+nhanes_small %>%
+    filter(phys_active == "No")
+
+nhanes_small %>%
+    filter(bmi >= 25)
+
+# Combining logical operators
+nhanes_small %>%
+    filter(phys_active == "No" & bmi >= 25)
+
+nhanes_small %>%
+    filter(phys_active == "No" | bmi >= 25)
+
+# Arrange data
+nhanes_small %>%
+    arrange(desc(age))
+
+nhanes_small %>%
+    arrange(education, age)
+
+# Transform data
+nhanes_small %>%
+    mutate(age = age * 12,
+           logged_bmi = log(bmi))
+
+nhanes_small %>%
+    mutate(old = if_else(age >= 30, "Yes", "No"))
+
