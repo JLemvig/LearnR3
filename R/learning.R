@@ -110,3 +110,6 @@ nhanes_modified %>%
 # Saving data
 readr::write_csv(nhanes_small,
                  here::here("data/nhanes_small.csv"))
+
+# For ordering factors
+forcats::
