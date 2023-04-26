@@ -19,7 +19,7 @@ The following folders contain:
 - `doc/`:
 - `R/`:
 
-# Installing project R package dependencies
+# Installing project R package dependencies sd
 
 If dependencies have been managed by using `usethis::use_package("packagename")`
 through the `DESCRIPTION` file, installing dependencies is as easy as opening thea
