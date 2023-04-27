@@ -49,17 +49,104 @@ nhanes_small %>%
     mean_bmi = round(mean_bmi, 1),
     # Task 2b.
     education = str_to_sentence(education),
-    education = forcats::fct_relevel(education,c("8th grade", "9 - 11th grade", "High school", "Some college", "College grad"))
-  ) %>% 
-  arrange(diabetes,education) %>% 
+    education = forcats::fct_relevel(education, c("8th grade", "9 - 11th grade", "High school", "Some college", "College grad"))
+  ) %>%
+  arrange(diabetes, education) %>%
   rename(
     # Task 3.
     "Diabetes Status" = diabetes,
     "Education" = education,
     "Mean Age" = mean_age,
     "Mean BMI" = mean_bmi
-  ) %>% 
+  ) %>%
   knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status.")
 ```
 
 ![Hello](images/kitten.jpg){#fig-kitten-attack width="50%" height="50%"}
+
+## Viualizing data
+
+```{r}
+#| warning: true
+# Create histogram for BMI
+ggplot(nhanes_small, aes(x = bmi)) +
+  geom_histogram()
+```
+
+```{r}
+# Create histogram for BMI
+ggplot(nhanes_small, aes(x = bmi)) +
+  geom_histogram(na.rm = TRUE)
+```
+
+```{r}
+nhanes_small %>%
+  filter(bmi <= 60) %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram()
+```
+
+BMI distribution in NHANES dataset was cisualised in @fig-bmi-histo. 
+
+```{r}
+#| fig-cap: "Distribution of BMI."
+#| label: fig-bmi-histo
+
+nhanes_small %>%
+  filter(bmi <= 60) %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram(na.rm = TRUE)
+```
+
+```{r}
+# Create count barplot for education
+ggplot(nhanes_small, aes(x = education)) +
+  geom_bar()
+```
+
+```{r}
+# Create count barplot for education
+ggplot(nhanes_small, aes(x = diabetes)) +
+  geom_bar()
+```
+
+```{r}
+# Create count barplot for education
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes)) +
+  geom_bar()
+```
+
+```{r}
+# Create count barplot for education
+nhanes_small %>%
+  filter(!is.na(education)) %>%
+  mutate(education = forcats::fct_relevel(education, c("8th Grade", "9 - 11th Grade", "High School", "Some College", "College Grad"))) %>%
+  arrange(education) %>%
+  ggplot(aes(x = education)) +
+  geom_bar()
+```
+
+```{r}
+#| label: fig-diabetes-education
+#| fig-cap: "Counts of diabetes and education in NHANES"
+#| fig-subcap:
+#|   - "Number of those with or without diabetes."
+#|   - "Number of those with different educational status."
+#| layout-ncol: 2
+
+
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes)) +
+  geom_bar()
+
+# Create count barplot for education
+nhanes_small %>%
+  filter(!is.na(education)) %>%
+  mutate(education = forcats::fct_relevel(education, c("8th Grade", "9 - 11th Grade", "High School", "Some College", "College Grad"))) %>%
+  arrange(education) %>%
+  ggplot(aes(x = education)) +
+  geom_bar()
+```
