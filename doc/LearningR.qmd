@@ -176,5 +176,46 @@ nhanes_small %>%
     geom_violin(na.rm = TRUE)
 ```
 
+## Exercise to make plots with one or two variables.
 
+```{r}
+nhanes_exercise <- NHANES %>%
+  rename_with(snakecase::to_snake_case) %>%
+  rename(sex = gender)
+```
 
+```{r}
+#| label: fig-age-plots
+#| fig-cap: "Distribution of age and distribution of age at diabetes diagnosis"
+#| fig-subcap:
+#|   - "Distribution of age."
+#|   - "Distribution of age at diabetes diagnosis"
+#| layout-ncol: 2
+
+nhanes_exercise %>% 
+    ggplot(aes(x = age)) +
+    geom_density(na.rm = TRUE)
+
+nhanes_exercise %>% 
+    ggplot(aes(x = diabetes_age)) +
+    geom_density(na.rm = TRUE)
+```
+
+```{r}
+#| label: fig-smoke-age
+#| fig-cap: Smokers vs non-smokers above the age of 20
+nhanes_exercise %>% 
+    filter(age >= 20, !is.na(smoke_now)) %>% 
+    ggplot(aes(x = smoke_now)) +
+    geom_bar()
+```
+
+```{r}
+#| label: fig-mean-arterial-pressure
+#| fig-cap: This is someting about mean arterial bloodpressure
+nhanes_exercise %>% 
+    mutate(mean_arterial_pressure = (bp_sys_ave + (2 * bp_dia_ave)/3)) %>% 
+    ggplot(aes(x = bmi, y = mean_arterial_pressure)) +
+    geom_hex(na.rm = TRUE) +
+    geom_smooth()
+```
