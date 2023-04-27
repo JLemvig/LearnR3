@@ -100,18 +100,6 @@ nhanes_small %>%
 
 ```{r}
 # Create count barplot for education
-ggplot(nhanes_small, aes(x = education)) +
-  geom_bar()
-```
-
-```{r}
-# Create count barplot for education
-ggplot(nhanes_small, aes(x = diabetes)) +
-  geom_bar()
-```
-
-```{r}
-# Create count barplot for education
 nhanes_small %>%
   filter(!is.na(diabetes)) %>%
   ggplot(aes(x = diabetes)) +
@@ -150,3 +138,43 @@ nhanes_small %>%
   ggplot(aes(x = education)) +
   geom_bar()
 ```
+
+```{r}
+nhanes_small %>%
+    filter(!is.na(bp_sys_ave),!is.na(bmi)) %>% 
+    ggplot(aes(x = bmi, y = bp_sys_ave)) + 
+    geom_hex() +
+    geom_smooth()
+```
+
+```{r}
+nhanes_small %>%
+    filter(!is.na(education), !is.na(diabetes)) %>%
+    mutate(education = forcats::fct_relevel(education, c("8th Grade", "9 - 11th Grade", "High School", "Some College", "College Grad"))) %>%
+  arrange(education) %>%
+    ggplot(aes(x = diabetes, fill = education)) +
+    geom_bar()
+```
+
+```{r}
+# "dodged" bar plot
+nhanes_small %>%
+    filter(!is.na(education), !is.na(diabetes)) %>%
+    mutate(education = forcats::fct_relevel(education, c("8th Grade", "9 - 11th Grade", "High School", "Some College", "College Grad"))) %>%
+  arrange(education) %>%
+    ggplot(aes(x = diabetes, fill = education)) +
+    geom_bar(position = position_dodge())
+```
+
+### Plotting continious and discrete variables
+
+```{r}
+# Using mixed data
+nhanes_small %>%
+    filter(!is.na(diabetes), bmi <= 60) %>%
+    ggplot(aes(x = diabetes, y = bmi, fill = diabetes)) +
+    geom_violin(na.rm = TRUE)
+```
+
+
+
