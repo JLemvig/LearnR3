@@ -219,3 +219,20 @@ nhanes_exercise %>%
     geom_hex(na.rm = TRUE) +
     geom_smooth()
 ```
+
+### Plotting three or more variables
+
+```{r}
+# Plot systolic blood pressure in relation to educational status and diabetes
+nhanes_small %>% 
+    filter(!is.na(diabetes), !is.na(education)) %>% 
+    ggplot(aes(x = education, y = bp_sys_ave, colour = diabetes)) +
+    geom_boxplot(na.rm = TRUE)
+```
+
+```{r}
+# Plot BMI in relation to systolic blood pressure and age
+nhanes_small %>%  
+    ggplot(aes(x = bmi, y = bp_sys_ave, colour = age)) +
+    geom_point(na.rm = TRUE)
+```
